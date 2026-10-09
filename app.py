@@ -5,7 +5,7 @@
 import streamlit as st
 import joblib
 import re
-
+import re
 from nltk.corpus import stopwords
 from nltk.stem import WordNetLemmatizer
 
@@ -45,6 +45,15 @@ model, vectorizer = load_model()
 # ============================================================
 # 3. LOAD NLP TOOLS
 # ============================================================
+
+@st.cache_resource
+def download_nltk_resources():
+    nltk.download("stopwords", quiet=True)
+    nltk.download("wordnet", quiet=True)
+    nltk.download("omw-1.4", quiet=True)
+
+download_nltk_resources()
+
 
 stop_words = set(
     stopwords.words("english")
